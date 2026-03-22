@@ -79,5 +79,5 @@ module_init(chardev_init);
 module_exit(chardev_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Your Name");
+MODULE_AUTHOR("ghaith lassoued");
 MODULE_DESCRIPTION("A simple character device that reverses strings");
