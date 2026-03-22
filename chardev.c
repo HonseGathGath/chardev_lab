@@ -55,12 +55,15 @@ static ssize_t device_write(struct file *filp, const char __user *buffer,
   return length;
 }
 
+// to give the kernel our custom read and write functions
 static struct file_operations fops = {
     .read = device_read,
     .write = device_write,
 };
 
+// used when isnmod
 static int __init chardev_init(void) {
+  // introduces a character device
   major_num = register_chrdev(0, DEVICE_NAME, &fops);
   if (major_num < 0) {
     printk(KERN_ALERT "reverse_dev failed with %d\n", major_num);
@@ -70,6 +73,7 @@ static int __init chardev_init(void) {
   return 0;
 }
 
+// used when rmmod
 static void __exit chardev_exit(void) {
   unregister_chrdev(major_num, DEVICE_NAME);
   printk(KERN_INFO "reverse_dev unloaded.\n");
